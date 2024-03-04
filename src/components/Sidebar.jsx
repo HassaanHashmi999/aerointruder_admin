@@ -6,7 +6,7 @@ import { TooltipComponent } from '@syncfusion/ej2-react-popups';
 import {links} from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
 const Sidebar = () => {
-  const { activeMenu,setActiveMenu,screenSize } = useStateContext();
+  const { currentColor, activeMenu, setActiveMenu, screenSize } = useStateContext();
   const handleCloseSideBar = () => {
     if (activeMenu !== undefined && screenSize <= 900) {
       setActiveMenu(false);
@@ -20,19 +20,19 @@ const Sidebar = () => {
       <div className="flex justify-between items-center">
 
       <Link to="/" onClick={handleCloseSideBar} className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900">
-      <img
-            src="/Aero.svg"
-            alt="logo"
-            className="w-1/6 h-1/6 object-contain"
-
-          /> <span className='mb-3'>AeroIntruder</span>
+        <img
+      src="/Aero.svg"
+      alt="logo"
+      className="w-1/4 h-1/4 object-contain"
+      //style={{ filter: 'brightness(0) invert(1) sepia(1) saturate(100) hue-rotate(600deg) grayscale(20) contrast(1)'}}
+  />
+            <span className='ml-3 mb-2'>AeroIntruder</span>
           </Link>
           <TooltipComponent content="Menu" position="BottomCenter">
               <button type='button'
-                onClick={() => setActiveMenu(
-                  (prevActiveMenu) => !prevActiveMenu
-                )}
-                className="text-xl rounded-full p-3 hover:bg-light-gray mt-1 block md:hidden"
+                onClick={() => setActiveMenu(!activeMenu)}
+                style={{ color: currentColor }}
+                className="text-xl rounded-full p-3 hover:bg-light-gray mt-2.5 block"
               >
                 <MdOutlineCancel />
               </button>
@@ -42,7 +42,7 @@ const Sidebar = () => {
       <div className='mt-10'>
               {links.map((item) =>(
                 <div key={item.title}>
-                  <p className='text-grey-400 m-3 mt-4 uppercase'>
+                  <p className='text-red-400 m-3 mt-4 uppercase'>
                   {item.title}
                   </p>
                   {item.links.map((link) => (
@@ -50,9 +50,11 @@ const Sidebar = () => {
                     key={link.name}
                     to={`/${link.name}`}
                     onClick={handleCloseSideBar}
-                    className={({ isActive }) =>
-                      isActive ? activeLink : normalLink}
-                    >
+                    style={({ isActive }) => ({
+                      backgroundColor: isActive ? currentColor : '',
+                    })}
+                    className={({ isActive }) => (isActive ? activeLink : normalLink)}
+                  >
                       {link.icon}
                       <span className='capitalize'>{link.name}</span>
 
