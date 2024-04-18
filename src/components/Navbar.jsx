@@ -47,8 +47,7 @@ const Navbar = () => {
   const handleActiveMenu = () => setActiveMenu(!activeMenu);
 
   return (
-    <div className='flex justify-between p-2 md:mx-6 relative'
-    >
+    <div className='flex justify-between p-2 md:mx-6 relative'>
     <NavButton title='Menu' customFunc={handleActiveMenu} icon={<AiOutlineMenu />} color={currentColor}/>
     <div className="flex">
         <NavButton title="Terminal" customFunc={() => handleClick('terminal')} color={currentColor} icon={<BsTerminalFill />} />

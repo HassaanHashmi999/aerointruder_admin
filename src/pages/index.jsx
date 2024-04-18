@@ -4,7 +4,6 @@ export { default as Vulnerabilities} from './Vulnerabilities';
 export { default as Access } from './Access';
 export { default as Editor } from './Editor';
 export { default as DataControl } from './DataControl';
-export { default as ColorPicker } from './Colorpicker';
 export { default as TimeTable } from './TimeTable';
 export { default as AreaChart } from './Charts/Area';
 export { default as BarChart } from './Charts/Bar';

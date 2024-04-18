@@ -4,11 +4,15 @@ import {GoDotFill} from 'react-icons/go';
 import {Stacked,Pie,Button,SparkLine} from '../components';
 import { earningData,SparklineAreaData,ecomPieChartData } from '../data/dummy';
 import { useStateContext } from '../contexts/ContextProvider';
+import { Header } from '../components';
+
 const AdminPanel = () => {
   const { currentColor, currentMode } = useStateContext();
 
   return (
     <div className='mt-24'>
+      
+      
       <div className='flex flex-wrap lg:flex-nowrap justify-center'>
         <div className='bg-white dark:text-gray-200 dark:bg-secondary-dark-bg h-44 rounded-xl w-full lg:w-80 p-8 pt-9 m-3 bg-hero-pattern bg-no-repeat bg-cover bg-center'>
           <div className='flex justify-between items-center'>
@@ -28,6 +32,7 @@ const AdminPanel = () => {
             text='Report'
             borderRadius='10px'
             size='md'
+            url="http://127.0.0.1:7860/"
             />
           </div>
         </div>

@@ -1,6 +1,5 @@
 import React from 'react';
-import { Toolbar,GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page } from '@syncfusion/ej2-react-grids';
-
+import { Toolbar, GridComponent, Inject, ColumnsDirective, ColumnDirective, Search, Page } from '@syncfusion/ej2-react-grids';
 import { DataData, DataGrid } from '../data/dummy';
 import { Header } from '../components';
 
@@ -8,6 +7,11 @@ const DataControl = () => {
   const toolbarOptions = ['Search'];
 
   const editing = { allowDeleting: true, allowEditing: true };
+
+  // Custom renderer for the Link column
+  const linkTemplate = (props) => {
+    return <a href={props.Link} target="_blank" rel="noopener noreferrer">{props.Link}</a>;
+  };
 
   return (
     <div className="m-2 md:m-10 mt-24 p-2 md:p-10 bg-white rounded-3xl">
@@ -22,13 +26,21 @@ const DataControl = () => {
         toolbar={toolbarOptions}
       >
         <ColumnsDirective>
-          {/* eslint-disable-next-line react/jsx-props-no-spreading */}
-          {DataGrid.map((item, index) => <ColumnDirective key={index} {...item} />)}
+          {/* Mapping through DataGrid and rendering columns */}
+          {DataGrid.map((item, index) => {
+            // Checking if the column is for Link
+            if (item.field === 'Link') {
+              return (
+                <ColumnDirective key={index} {...item} template={linkTemplate} />
+              );
+            }
+            return <ColumnDirective key={index} {...item} />;
+          })}
         </ColumnsDirective>
-        <Inject services={[Toolbar,Search, Page]} />
-
+        <Inject services={[Toolbar, Search, Page]} />
       </GridComponent>
     </div>
   );
 };
+
 export default DataControl;
